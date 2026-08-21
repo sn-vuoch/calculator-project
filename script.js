@@ -39,3 +39,16 @@ function operate(operator, num1, num2) {
 let firstNumber;
 let secondNumber;
 let operator;
+const digitNumber = document.querySelector(".left-container");
+const displayBox = document.querySelector(".display-box");
+const result = document.createElement("p");
+
+// Events on 0-9 and .
+digitNumber.addEventListener("click", function (e) {
+  // Check if clicked is button or not
+  if (e.target.tagName === "BUTTON") {
+    result.textContent += e.target.textContent;
+  }
+
+  displayBox.appendChild(result);
+});

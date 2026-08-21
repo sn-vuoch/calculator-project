@@ -39,7 +39,7 @@ body {
 
 /* Left Container */
 .left-container {
-  /* border: 2px solid yellow; */
+  border: 2px solid yellow;
   width: 80%;
   display: flex;
   flex-direction: column;
