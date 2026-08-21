@@ -35,3 +35,7 @@ function operate(operator, num1, num2) {
   }
   return result;
 }
+
+let firstNumber;
+let secondNumber;
+let operator;
