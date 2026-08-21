@@ -26,10 +26,10 @@ function operate(operator, num1, num2) {
     case "-":
       result = subtract(num1, num2);
       break;
-    case "*":
+    case "×":
       result = multiply(num1, num2);
       break;
-    case "/":
+    case "÷":
       result = divide(num1, num2);
       break;
   }
@@ -40,15 +40,31 @@ let firstNumber;
 let secondNumber;
 let operator;
 const digitNumber = document.querySelector(".left-container");
+const digitOperator = document.querySelector(".right-container");
 const displayBox = document.querySelector(".display-box");
-const result = document.createElement("p");
+const result = document.querySelector(".result");
 
-// Events on 0-9 and .
+// Event on 0-9 and .
 digitNumber.addEventListener("click", function (e) {
   // Check if clicked is button or not
   if (e.target.tagName === "BUTTON") {
     result.textContent += e.target.textContent;
   }
+});
 
-  displayBox.appendChild(result);
+// Event on operators
+digitOperator.addEventListener("click", function (e) {
+  // Check if clicked is button or not
+  if (e.target.tagName === "BUTTON" && e.target.textContent !== "=") {
+    firstNumber = Number(result.textContent);
+    console.log(firstNumber);
+    result.textContent = "";
+    operator = e.target.textContent;
+  }
+
+  if (e.target.textContent === "=") {
+    secondNumber = Number(result.textContent);
+    result.textContent = "";
+    result.textContent = operate(operator, firstNumber, secondNumber);
+  }
 });
