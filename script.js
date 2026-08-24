@@ -65,6 +65,11 @@ digitOperator.addEventListener("click", function (e) {
   if (e.target.textContent === "=") {
     secondNumber = Number(result.textContent);
     result.textContent = "";
-    result.textContent = operate(operator, firstNumber, secondNumber);
+    let answer = operate(operator, firstNumber, secondNumber);
+    if (Number.isInteger(answer)) {
+      result.textContent = answer;
+    } else {
+      result.textContent = parseFloat(answer.toFixed(6));
+    }
   }
 });
