@@ -21,12 +21,17 @@ body {
   height: 20%;
   padding: 0px 10px;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
   align-items: flex-end;
+  justify-content: space-evenly;
 }
 
-.display-box p {
+.display-box .result {
   font-size: 50px;
+}
+
+.calculation {
+  font-size: 25px;
 }
 
 .digit-button {

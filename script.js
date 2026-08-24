@@ -43,12 +43,14 @@ const digitNumber = document.querySelector(".left-container");
 const digitOperator = document.querySelector(".right-container");
 const displayBox = document.querySelector(".display-box");
 const result = document.querySelector(".result");
+const calculation = document.querySelector(".calculation");
 
 // Event on 0-9 and .
 digitNumber.addEventListener("click", function (e) {
   // Check if clicked is button or not
   if (e.target.tagName === "BUTTON") {
     result.textContent += e.target.textContent;
+    calculation.textContent += e.target.textContent;
   }
 });
 
@@ -57,14 +59,15 @@ digitOperator.addEventListener("click", function (e) {
   // Check if clicked is button or not
   if (e.target.tagName === "BUTTON" && e.target.textContent !== "=") {
     firstNumber = Number(result.textContent);
-    console.log(firstNumber);
     result.textContent = "";
     operator = e.target.textContent;
+    calculation.textContent += operator;
   }
 
   if (e.target.textContent === "=") {
     secondNumber = Number(result.textContent);
     result.textContent = "";
+    calculation.textContent += "=";
     let answer = operate(operator, firstNumber, secondNumber);
     if (Number.isInteger(answer)) {
       result.textContent = answer;
