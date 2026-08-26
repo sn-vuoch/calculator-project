@@ -39,6 +39,7 @@ function operate(operator, num1, num2) {
 let firstNumber;
 let secondNumber;
 let operator;
+let answer;
 const digitNumber = document.querySelector(".left-container");
 const digitOperator = document.querySelector(".right-container");
 const displayBox = document.querySelector(".display-box");
@@ -49,6 +50,10 @@ const calculation = document.querySelector(".calculation");
 digitNumber.addEventListener("click", function (e) {
   // Check if clicked is button or not
   if (e.target.tagName === "BUTTON") {
+    if (result.textContent === String(answer)) {
+      result.textContent = "";
+      calculation.textContent = "";
+    }
     result.textContent += e.target.textContent;
     calculation.textContent += e.target.textContent;
   }
@@ -62,13 +67,46 @@ digitOperator.addEventListener("click", function (e) {
     result.textContent = "";
     operator = e.target.textContent;
     calculation.textContent += operator;
+
+    // Work after once calculation
+    if (
+      calculation.textContent.includes(`${operator}`) &&
+      calculation.textContent.includes("=")
+    ) {
+      calculation.textContent = firstNumber + operator;
+    }
+
+    // Check if second number isn't click yet then remove equal
+    if (calculation.textContent.includes("=")) {
+      let removeEqual = calculation.textContent
+        .split("")
+        .filter((item) => item !== "=")
+        .join("");
+      calculation.textContent = removeEqual;
+    }
   }
 
   if (e.target.textContent === "=") {
+    // Check if second number is available or not
+    if (secondNumber === undefined && firstNumber === undefined) {
+      return;
+    }
+
+    // Check if the result found, so equal stop working
+    if (calculation.textContent.includes("=")) {
+      return;
+    }
+
     secondNumber = Number(result.textContent);
     result.textContent = "";
+
+    if (firstNumber !== undefined && secondNumber === 0) {
+      return;
+    }
+
     calculation.textContent += "=";
-    let answer = operate(operator, firstNumber, secondNumber);
+
+    answer = operate(operator, firstNumber, secondNumber);
     if (Number.isInteger(answer)) {
       result.textContent = answer;
     } else {
