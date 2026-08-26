@@ -36,10 +36,21 @@ function operate(operator, num1, num2) {
   return result;
 }
 
+function addOperator(operator) {
+  const lastChar = calculation.textContent.slice(-1);
+
+  if (operationString.includes(lastChar)) {
+    calculation.textContent = calculation.textContent.slice(0, -1) + operator;
+  } else {
+    calculation.textContent += operator;
+  }
+}
+
 let firstNumber;
 let secondNumber;
 let operator;
 let answer;
+let operationString = "+-×÷";
 const digitNumber = document.querySelector(".left-container");
 const digitOperator = document.querySelector(".right-container");
 const displayBox = document.querySelector(".display-box");
@@ -75,10 +86,14 @@ digitNumber.addEventListener("click", function (e) {
 digitOperator.addEventListener("click", function (e) {
   // Check if clicked is button or not
   if (e.target.tagName === "BUTTON" && e.target.textContent !== "=") {
-    firstNumber = Number(result.textContent);
-    result.textContent = "";
+    let tempInput = result.textContent;
+    if (tempInput !== "") {
+      firstNumber = Number(tempInput);
+      result.textContent = "";
+    }
+
     operator = e.target.textContent;
-    calculation.textContent += operator;
+    addOperator(operator);
 
     // Work after once calculation
     if (
