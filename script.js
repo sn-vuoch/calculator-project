@@ -50,10 +50,22 @@ const calculation = document.querySelector(".calculation");
 digitNumber.addEventListener("click", function (e) {
   // Check if clicked is button or not
   if (e.target.tagName === "BUTTON") {
+    // Work when result calculated, then start a new number
     if (result.textContent === String(answer)) {
       result.textContent = "";
       calculation.textContent = "";
     }
+
+    // Work when pressing clear button
+    if (e.target.textContent === "Clear") {
+      result.textContent = "";
+      calculation.textContent = "";
+      firstNumber = null;
+      secondNumber = null;
+      operator = null;
+      return;
+    }
+
     result.textContent += e.target.textContent;
     calculation.textContent += e.target.textContent;
   }
