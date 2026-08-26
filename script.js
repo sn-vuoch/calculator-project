@@ -88,8 +88,17 @@ digitOperator.addEventListener("click", function (e) {
       calculation.textContent = firstNumber + operator;
     }
 
-    // Check if second number isn't click yet then remove equal
+    if (result.textContent === "ERROR") {
+      result.textContent = "";
+      calculation.textContent = "";
+      firstNumber = null;
+      secondNumber = null;
+      operator = null;
+      return;
+    }
+
     if (calculation.textContent.includes("=")) {
+      // Check if second number isn't click yet then remove equal
       let removeEqual = calculation.textContent
         .split("")
         .filter((item) => item !== "=")
@@ -110,15 +119,21 @@ digitOperator.addEventListener("click", function (e) {
     }
 
     secondNumber = Number(result.textContent);
+    let secondNumberString = result.textContent;
     result.textContent = "";
 
-    if (firstNumber !== undefined && secondNumber === 0) {
+    // Work when firstNumber is available but secondNumber isn't then press equal
+    if (firstNumber !== undefined && secondNumberString === "") {
       return;
     }
 
     calculation.textContent += "=";
 
     answer = operate(operator, firstNumber, secondNumber);
+    if (typeof answer === "string") {
+      result.textContent = answer;
+      return;
+    }
     if (Number.isInteger(answer)) {
       result.textContent = answer;
     } else {
