@@ -86,6 +86,15 @@ digitNumber.addEventListener("click", function (e) {
 digitOperator.addEventListener("click", function (e) {
   // Check if clicked is button or not
   if (e.target.tagName === "BUTTON" && e.target.textContent !== "=") {
+    if (result.textContent === "ERROR") {
+      result.textContent = "";
+      calculation.textContent = "";
+      firstNumber = null;
+      secondNumber = null;
+      operator = null;
+      return;
+    }
+
     let tempInput = result.textContent;
     if (tempInput !== "") {
       firstNumber = Number(tempInput);
@@ -101,15 +110,6 @@ digitOperator.addEventListener("click", function (e) {
       calculation.textContent.includes("=")
     ) {
       calculation.textContent = firstNumber + operator;
-    }
-
-    if (result.textContent === "ERROR") {
-      result.textContent = "";
-      calculation.textContent = "";
-      firstNumber = null;
-      secondNumber = null;
-      operator = null;
-      return;
     }
 
     if (calculation.textContent.includes("=")) {
