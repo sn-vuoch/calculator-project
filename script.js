@@ -71,9 +71,9 @@ digitNumber.addEventListener("click", function (e) {
     if (e.target.textContent === "Clear") {
       result.textContent = "";
       calculation.textContent = "";
-      firstNumber = null;
-      secondNumber = null;
-      operator = null;
+      firstNumber = undefined;
+      secondNumber = undefined;
+      operator = undefined;
       return;
     }
 
@@ -84,44 +84,40 @@ digitNumber.addEventListener("click", function (e) {
 
 // Event on operators
 digitOperator.addEventListener("click", function (e) {
+  const clickedOperator = e.target.textContent;
+  // ===== OPERATOR =====
   // Check if clicked is button or not
-  if (e.target.tagName === "BUTTON" && e.target.textContent !== "=") {
+  if (e.target.tagName === "BUTTON" && clickedOperator !== "=") {
+    // If there is error message
     if (result.textContent === "ERROR") {
       result.textContent = "";
       calculation.textContent = "";
-      firstNumber = null;
-      secondNumber = null;
-      operator = null;
+      firstNumber = undefined;
+      secondNumber = undefined;
+      operator = undefined;
       return;
     }
 
-    let tempInput = result.textContent;
-    if (tempInput !== "") {
-      firstNumber = Number(tempInput);
+    // Get first number only if user has entered a number
+    if (result.textContent !== "") {
+      firstNumber = Number(result.textContent);
       result.textContent = "";
     }
 
-    operator = e.target.textContent;
-    addOperator(operator);
+    addOperator(clickedOperator);
 
-    // Work after once calculation
+    operator = clickedOperator;
+
+    // Work after once calculation, before 12+3+4 = 19 to 15+4 = 19. Use like this to avoid 12+3*2 = 30 (correct result is 18)
     if (
       calculation.textContent.includes(`${operator}`) &&
       calculation.textContent.includes("=")
     ) {
       calculation.textContent = firstNumber + operator;
     }
-
-    if (calculation.textContent.includes("=")) {
-      // Check if second number isn't click yet then remove equal
-      let removeEqual = calculation.textContent
-        .split("")
-        .filter((item) => item !== "=")
-        .join("");
-      calculation.textContent = removeEqual;
-    }
   }
 
+  // ===== EQUAL =====
   if (e.target.textContent === "=") {
     // Check if second number is available or not
     if (secondNumber === undefined && firstNumber === undefined) {
