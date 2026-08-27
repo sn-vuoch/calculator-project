@@ -51,6 +51,7 @@ let secondNumber;
 let operator;
 let answer;
 let operationString = "+-×÷";
+let isPeriodAvailable = false;
 const digitNumber = document.querySelector(".left-container");
 const digitOperator = document.querySelector(".right-container");
 const displayBox = document.querySelector(".display-box");
@@ -59,12 +60,14 @@ const calculation = document.querySelector(".calculation");
 
 // Event on 0-9 and .
 digitNumber.addEventListener("click", function (e) {
+  // ===== 0-9 =====
   // Check if clicked is button or not
   if (e.target.tagName === "BUTTON") {
     // Work when result calculated, then start a new number
     if (result.textContent === String(answer)) {
       result.textContent = "";
       calculation.textContent = "";
+      isPeriodAvailable = false;
     }
 
     // Work when pressing clear button
@@ -74,11 +77,24 @@ digitNumber.addEventListener("click", function (e) {
       firstNumber = undefined;
       secondNumber = undefined;
       operator = undefined;
+      isPeriodAvailable = false;
       return;
     }
 
-    result.textContent += e.target.textContent;
-    calculation.textContent += e.target.textContent;
+    if (e.target.textContent !== ".") {
+      result.textContent += e.target.textContent;
+      calculation.textContent += e.target.textContent;
+    } else if (
+      e.target.textContent === "." &&
+      !isPeriodAvailable &&
+      result.textContent !== ""
+    ) {
+      result.textContent += e.target.textContent;
+      calculation.textContent += e.target.textContent;
+      isPeriodAvailable = true;
+    } else {
+      return;
+    }
   }
 });
 
@@ -95,6 +111,7 @@ digitOperator.addEventListener("click", function (e) {
       firstNumber = undefined;
       secondNumber = undefined;
       operator = undefined;
+      isPeriodAvailable = false;
       return;
     }
 
@@ -107,6 +124,8 @@ digitOperator.addEventListener("click", function (e) {
     addOperator(clickedOperator);
 
     operator = clickedOperator;
+
+    isPeriodAvailable = false;
 
     // Work after once calculation, before 12+3+4 = 19 to 15+4 = 19. Use like this to avoid 12+3*2 = 30 (correct result is 18)
     if (
@@ -147,8 +166,12 @@ digitOperator.addEventListener("click", function (e) {
     }
     if (Number.isInteger(answer)) {
       result.textContent = answer;
+      isPeriodAvailable = false;
     } else {
       result.textContent = parseFloat(answer.toFixed(6));
+      console.log(answer);
+      console.log(result.textContent);
+      isPeriodAvailable = false;
     }
   }
 });
