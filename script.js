@@ -103,7 +103,11 @@ digitOperator.addEventListener("click", function (e) {
   const clickedOperator = e.target.textContent;
   // ===== OPERATOR =====
   // Check if clicked is button or not
-  if (e.target.tagName === "BUTTON" && clickedOperator !== "=") {
+  if (
+    e.target.tagName === "BUTTON" &&
+    clickedOperator !== "=" &&
+    clickedOperator !== "Delete"
+  ) {
     // If there is error message
     if (result.textContent === "ERROR") {
       result.textContent = "";
@@ -112,6 +116,10 @@ digitOperator.addEventListener("click", function (e) {
       secondNumber = undefined;
       operator = undefined;
       isPeriodAvailable = false;
+      return;
+    }
+
+    if (operator !== undefined) {
       return;
     }
 
@@ -168,5 +176,18 @@ digitOperator.addEventListener("click", function (e) {
     answer = parseFloat(answer.toFixed(6));
     result.textContent = answer;
     isPeriodAvailable = false;
+    operator = undefined;
+  }
+
+  // ===== BACKSPACE =====
+  if (e.target.textContent === "Delete") {
+    if (result.textContent === String(answer)) {
+      result.textContent = "";
+      calculation.textContent = "";
+      isPeriodAvailable = false;
+      return;
+    }
+    result.textContent = result.textContent.slice(0, -1);
+    calculation.textContent = calculation.textContent.slice(0, -1);
   }
 });
