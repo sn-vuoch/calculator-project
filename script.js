@@ -119,7 +119,16 @@ digitOperator.addEventListener("click", function (e) {
       return;
     }
 
+    // Check if operator in calculation or not, if it in press other operators will not working until press equal
     if (operator !== undefined) {
+      return;
+    }
+
+    // Disable operators to get click before firstNumber isn't available yet
+    if (
+      operationString.includes(e.target.textContent) &&
+      result.textContent === ""
+    ) {
       return;
     }
 
