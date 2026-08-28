@@ -164,14 +164,9 @@ digitOperator.addEventListener("click", function (e) {
       result.textContent = answer;
       return;
     }
-    if (Number.isInteger(answer)) {
-      result.textContent = answer;
-      isPeriodAvailable = false;
-    } else {
-      result.textContent = parseFloat(answer.toFixed(6));
-      console.log(answer);
-      console.log(result.textContent);
-      isPeriodAvailable = false;
-    }
+
+    answer = parseFloat(answer.toFixed(6));
+    result.textContent = answer;
+    isPeriodAvailable = false;
   }
 });
