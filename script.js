@@ -51,6 +51,7 @@ let secondNumber;
 let operator;
 let answer;
 let operationString = "+-×÷";
+let numberString = "0123456789";
 let isPeriodAvailable = false;
 const digitNumber = document.querySelector(".left-container");
 const digitOperator = document.querySelector(".right-container");
@@ -190,6 +191,151 @@ digitOperator.addEventListener("click", function (e) {
 
   // ===== BACKSPACE =====
   if (e.target.textContent === "Delete") {
+    if (result.textContent === String(answer)) {
+      result.textContent = "";
+      calculation.textContent = "";
+      isPeriodAvailable = false;
+      return;
+    }
+    result.textContent = result.textContent.slice(0, -1);
+    calculation.textContent = calculation.textContent.slice(0, -1);
+  }
+});
+
+// Keyboard events
+document.addEventListener("keydown", function (e) {
+  const keyClickedOperator = e.key;
+  console.log(keyClickedOperator);
+  // ===== 0-9 and . =====
+  // Check if key clicked is button or not
+  if (
+    numberString.includes(keyClickedOperator) ||
+    keyClickedOperator === "." ||
+    keyClickedOperator === "Escape"
+  ) {
+    // Work when result calculated, then start a new number
+    if (result.textContent === String(answer)) {
+      result.textContent = "";
+      calculation.textContent = "";
+      isPeriodAvailable = false;
+    }
+
+    // Work when pressing clear button
+    if (keyClickedOperator === "Escape") {
+      result.textContent = "";
+      calculation.textContent = "";
+      firstNumber = undefined;
+      secondNumber = undefined;
+      operator = undefined;
+      isPeriodAvailable = false;
+      return;
+    }
+
+    if (keyClickedOperator !== ".") {
+      result.textContent += keyClickedOperator;
+      calculation.textContent += keyClickedOperator;
+    } else if (
+      keyClickedOperator === "." &&
+      !isPeriodAvailable &&
+      result.textContent !== ""
+    ) {
+      result.textContent += keyClickedOperator;
+      calculation.textContent += keyClickedOperator;
+      isPeriodAvailable = true;
+    } else {
+      return;
+    }
+  }
+
+  // ===== OPERATOR ====
+  // Check if key clicked are +, -, *, and /
+  if (
+    operationString.includes(keyClickedOperator) &&
+    (keyClickedOperator !== "=" || keyClickedOperator !== "Enter") &&
+    keyClickedOperator !== "Delete"
+  ) {
+    // If there is error message
+    if (result.textContent === "ERROR") {
+      result.textContent = "";
+      calculation.textContent = "";
+      firstNumber = undefined;
+      secondNumber = undefined;
+      operator = undefined;
+      isPeriodAvailable = false;
+      return;
+    }
+
+    // Check if operator in calculation or not, if it in press other operators will not working until press equal
+    if (operator !== undefined) {
+      return;
+    }
+
+    // Disable operators to get click before firstNumber isn't available yet
+    if (
+      operationString.includes(keyClickedOperator) &&
+      result.textContent === ""
+    ) {
+      return;
+    }
+
+    // Get first number only if user has entered a number
+    if (result.textContent !== "") {
+      firstNumber = Number(result.textContent);
+      result.textContent = "";
+    }
+
+    addOperator(keyClickedOperator);
+
+    operator = keyClickedOperator;
+
+    isPeriodAvailable = false;
+
+    // Work after once calculation, before 12+3+4 = 19 to 15+4 = 19. Use like this to avoid 12+3*2 = 30 (correct result is 18)
+    if (
+      calculation.textContent.includes(`${operator}`) &&
+      calculation.textContent.includes("=")
+    ) {
+      calculation.textContent = firstNumber + operator;
+    }
+  }
+
+  // ===== EQUAL ====
+  if (keyClickedOperator === "=" || keyClickedOperator === "Enter") {
+    // Check if second number is available or not
+    if (secondNumber === undefined && firstNumber === undefined) {
+      return;
+    }
+
+    // Check if the result found, so equal stop working
+    if (calculation.textContent.includes("=")) {
+      return;
+    }
+
+    secondNumber = Number(result.textContent);
+    let secondNumberString = result.textContent;
+    result.textContent = "";
+
+    // Work when firstNumber is available but secondNumber isn't then press equal
+    if (firstNumber !== undefined && secondNumberString === "") {
+      return;
+    }
+
+    calculation.textContent += "=";
+
+    answer = operate(operator, firstNumber, secondNumber);
+    if (typeof answer === "string") {
+      result.textContent = answer;
+      return;
+    }
+
+    answer = parseFloat(answer.toFixed(6));
+    result.textContent = answer;
+    isPeriodAvailable = false;
+    operator = undefined;
+  }
+
+  // ===== BACKSPACE =====
+  if (keyClickedOperator === "Backspace") {
     if (result.textContent === String(answer)) {
       result.textContent = "";
       calculation.textContent = "";
