@@ -68,6 +68,10 @@ digitNumber.addEventListener("click", function (e) {
     if (result.textContent === String(answer)) {
       result.textContent = "";
       calculation.textContent = "";
+      firstNumber = undefined;
+      secondNumber = undefined;
+      operator = undefined;
+      answer = undefined;
       isPeriodAvailable = false;
     }
 
@@ -217,6 +221,10 @@ document.addEventListener("keydown", function (e) {
     if (result.textContent === String(answer)) {
       result.textContent = "";
       calculation.textContent = "";
+      firstNumber = undefined;
+      secondNumber = undefined;
+      operator = undefined;
+      answer = undefined;
       isPeriodAvailable = false;
     }
 
