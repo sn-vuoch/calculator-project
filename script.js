@@ -125,14 +125,19 @@ digitOperator.addEventListener("click", function (e) {
     }
 
     // Check if operator in calculation or not, if it in press other operators will not working until press equal
-    if (operator !== undefined) {
+    if (
+      calculation.textContent.includes(operator) &&
+      firstNumber !== undefined &&
+      result.textContent !== ""
+    ) {
       return;
     }
 
     // Disable operators to get click before firstNumber isn't available yet
     if (
-      operationString.includes(e.target.textContent) &&
-      result.textContent === ""
+      operationString.includes(clickedOperator) &&
+      result.textContent === "" &&
+      firstNumber === undefined
     ) {
       return;
     }
@@ -274,14 +279,19 @@ document.addEventListener("keydown", function (e) {
     }
 
     // Check if operator in calculation or not, if it in press other operators will not working until press equal
-    if (operator !== undefined) {
+    if (
+      calculation.textContent.includes(operator) &&
+      firstNumber !== undefined &&
+      result.textContent !== ""
+    ) {
       return;
     }
 
     // Disable operators to get click before firstNumber isn't available yet
     if (
       operationString.includes(keyClickedOperator) &&
-      result.textContent === ""
+      result.textContent === "" &&
+      firstNumber === undefined
     ) {
       return;
     }
