@@ -50,7 +50,7 @@ let firstNumber;
 let secondNumber;
 let operator;
 let answer;
-let operationString = "+-×÷";
+let operationString = "+-×÷*/";
 let numberString = "0123456789";
 let isPeriodAvailable = false;
 const digitNumber = document.querySelector(".left-container");
@@ -213,8 +213,7 @@ digitOperator.addEventListener("click", function (e) {
 
 // Keyboard events
 document.addEventListener("keydown", function (e) {
-  const keyClickedOperator = e.key;
-  console.log(keyClickedOperator);
+  let keyClickedOperator = e.key;
   // ===== 0-9 and . =====
   // Check if key clicked is button or not
   if (
@@ -267,6 +266,15 @@ document.addEventListener("keydown", function (e) {
     (keyClickedOperator !== "=" || keyClickedOperator !== "Enter") &&
     keyClickedOperator !== "Delete"
   ) {
+    switch (keyClickedOperator) {
+      case "*":
+        keyClickedOperator = "×";
+        break;
+      case "/":
+        keyClickedOperator = "÷";
+        break;
+    }
+
     // If there is error message
     if (result.textContent === "ERROR") {
       result.textContent = "";
