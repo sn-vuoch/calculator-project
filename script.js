@@ -46,6 +46,11 @@ function addOperator(operator) {
   }
 }
 
+function deleteCharacter() {
+  result.textContent = result.textContent.slice(0, -1);
+  calculation.textContent = calculation.textContent.slice(0, -1);
+}
+
 let firstNumber;
 let secondNumber;
 let operator;
@@ -206,8 +211,23 @@ digitOperator.addEventListener("click", function (e) {
       isPeriodAvailable = false;
       return;
     }
-    result.textContent = result.textContent.slice(0, -1);
-    calculation.textContent = calculation.textContent.slice(0, -1);
+
+    if (operator !== undefined) {
+      if (calculation.textContent.slice(-1) === operator) {
+        deleteCharacter();
+        operator = undefined;
+        firstNumber = Number(calculation.textContent);
+      } else {
+        deleteCharacter();
+      }
+      return;
+    }
+
+    if (firstNumber !== undefined && calculation.textContent !== "") {
+      deleteCharacter();
+      firstNumber = Number(calculation.textContent);
+      console.log(firstNumber);
+    }
   }
 });
 
@@ -368,7 +388,22 @@ document.addEventListener("keydown", function (e) {
       isPeriodAvailable = false;
       return;
     }
-    result.textContent = result.textContent.slice(0, -1);
-    calculation.textContent = calculation.textContent.slice(0, -1);
+
+    if (operator !== undefined) {
+      if (calculation.textContent.slice(-1) === operator) {
+        deleteCharacter();
+        operator = undefined;
+        firstNumber = Number(calculation.textContent);
+      } else {
+        deleteCharacter();
+      }
+      return;
+    }
+
+    if (firstNumber !== undefined && calculation.textContent !== "") {
+      deleteCharacter();
+      firstNumber = Number(calculation.textContent);
+      console.log(firstNumber);
+    }
   }
 });
