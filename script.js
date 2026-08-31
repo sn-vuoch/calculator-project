@@ -212,6 +212,13 @@ digitOperator.addEventListener("click", function (e) {
       return;
     }
 
+    if (result.textContent.slice(-1) === ".") {
+      deleteCharacter();
+      isPeriodAvailable = false;
+      console.log("Hello");
+      return;
+    }
+
     if (operator !== undefined) {
       if (calculation.textContent.slice(-1) === operator) {
         deleteCharacter();
