@@ -51,6 +51,12 @@ function deleteCharacter() {
   calculation.textContent = calculation.textContent.slice(0, -1);
 }
 
+function resetState() {
+  firstNumber = undefined;
+  secondNumber = undefined;
+  operator = undefined;
+}
+
 let firstNumber;
 let secondNumber;
 let operator;
@@ -73,9 +79,7 @@ digitNumber.addEventListener("click", function (e) {
     if (result.textContent === String(answer)) {
       result.textContent = "";
       calculation.textContent = "";
-      firstNumber = undefined;
-      secondNumber = undefined;
-      operator = undefined;
+      resetState();
       answer = undefined;
       isPeriodAvailable = false;
     }
@@ -84,9 +88,7 @@ digitNumber.addEventListener("click", function (e) {
     if (e.target.textContent === "Clear") {
       result.textContent = "";
       calculation.textContent = "";
-      firstNumber = undefined;
-      secondNumber = undefined;
-      operator = undefined;
+      resetState();
       isPeriodAvailable = false;
       return;
     }
@@ -122,9 +124,7 @@ digitOperator.addEventListener("click", function (e) {
     if (result.textContent === "ERROR") {
       result.textContent = "";
       calculation.textContent = "";
-      firstNumber = undefined;
-      secondNumber = undefined;
-      operator = undefined;
+      resetState();
       isPeriodAvailable = false;
       return;
     }
@@ -208,6 +208,7 @@ digitOperator.addEventListener("click", function (e) {
     if (result.textContent === String(answer)) {
       result.textContent = "";
       calculation.textContent = "";
+      resetState();
       isPeriodAvailable = false;
       return;
     }
@@ -254,9 +255,7 @@ document.addEventListener("keydown", function (e) {
     if (result.textContent === String(answer)) {
       result.textContent = "";
       calculation.textContent = "";
-      firstNumber = undefined;
-      secondNumber = undefined;
-      operator = undefined;
+      resetState();
       answer = undefined;
       isPeriodAvailable = false;
     }
@@ -265,9 +264,7 @@ document.addEventListener("keydown", function (e) {
     if (keyClickedOperator === "Escape") {
       result.textContent = "";
       calculation.textContent = "";
-      firstNumber = undefined;
-      secondNumber = undefined;
-      operator = undefined;
+      resetState();
       isPeriodAvailable = false;
       return;
     }
@@ -308,9 +305,7 @@ document.addEventListener("keydown", function (e) {
     if (result.textContent === "ERROR") {
       result.textContent = "";
       calculation.textContent = "";
-      firstNumber = undefined;
-      secondNumber = undefined;
-      operator = undefined;
+      resetState();
       isPeriodAvailable = false;
       return;
     }
@@ -394,6 +389,7 @@ document.addEventListener("keydown", function (e) {
     if (result.textContent === String(answer)) {
       result.textContent = "";
       calculation.textContent = "";
+      resetState();
       isPeriodAvailable = false;
       return;
     }
