@@ -215,7 +215,6 @@ digitOperator.addEventListener("click", function (e) {
     if (result.textContent.slice(-1) === ".") {
       deleteCharacter();
       isPeriodAvailable = false;
-      console.log("Hello");
       return;
     }
 
@@ -237,7 +236,6 @@ digitOperator.addEventListener("click", function (e) {
     if (firstNumber !== undefined && calculation.textContent !== "") {
       deleteCharacter();
       firstNumber = Number(calculation.textContent);
-      console.log(firstNumber);
     }
   }
 });
@@ -396,6 +394,12 @@ document.addEventListener("keydown", function (e) {
     if (result.textContent === String(answer)) {
       result.textContent = "";
       calculation.textContent = "";
+      isPeriodAvailable = false;
+      return;
+    }
+
+    if (result.textContent.slice(-1) === ".") {
+      deleteCharacter();
       isPeriodAvailable = false;
       return;
     }
