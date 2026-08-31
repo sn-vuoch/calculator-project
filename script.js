@@ -180,6 +180,11 @@ digitOperator.addEventListener("click", function (e) {
       return;
     }
 
+    // If operator is undefined, then ignore
+    if (operator === undefined) {
+      return;
+    }
+
     secondNumber = Number(result.textContent);
     let secondNumberString = result.textContent;
     result.textContent = "";
@@ -358,6 +363,11 @@ document.addEventListener("keydown", function (e) {
 
     // Check if the result found, so equal stop working
     if (calculation.textContent.includes("=")) {
+      return;
+    }
+
+    // If operator is undefined, then ignore
+    if (operator === undefined) {
       return;
     }
 
