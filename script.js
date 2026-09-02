@@ -64,6 +64,7 @@ let answer;
 let operationString = "+-×÷*/";
 let numberString = "0123456789";
 let isPeriodAvailable = false;
+let catchNumber = "";
 const digitNumber = document.querySelector(".left-container");
 const digitOperator = document.querySelector(".right-container");
 const displayBox = document.querySelector(".display-box");
@@ -149,7 +150,8 @@ digitOperator.addEventListener("click", function (e) {
 
     // Get first number only if user has entered a number
     if (result.textContent !== "") {
-      firstNumber = Number(result.textContent);
+      firstNumber = Number(catchNumber + result.textContent);
+      catchNumber = "";
       result.textContent = "";
     }
 
@@ -229,6 +231,7 @@ digitOperator.addEventListener("click", function (e) {
         deleteCharacter();
         operator = undefined;
         firstNumber = Number(calculation.textContent);
+        catchNumber = firstNumber;
       } else {
         deleteCharacter();
       }
