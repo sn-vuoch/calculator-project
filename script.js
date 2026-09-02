@@ -55,6 +55,7 @@ function resetState() {
   firstNumber = undefined;
   secondNumber = undefined;
   operator = undefined;
+  answer = undefined;
 }
 
 let firstNumber;
@@ -81,7 +82,6 @@ digitNumber.addEventListener("click", function (e) {
       result.textContent = "";
       calculation.textContent = "";
       resetState();
-      answer = undefined;
       isPeriodAvailable = false;
     }
 
@@ -264,7 +264,6 @@ document.addEventListener("keydown", function (e) {
       result.textContent = "";
       calculation.textContent = "";
       resetState();
-      answer = undefined;
       isPeriodAvailable = false;
     }
 
