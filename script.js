@@ -77,6 +77,9 @@ digitNumber.addEventListener("click", function (e) {
   // ===== 0-9 =====
   // Check if clicked is button or not
   if (e.target.tagName === "BUTTON") {
+    // Unfocus after every click
+    e.target.blur();
+
     // Work when result calculated, then start a new number
     if (result.textContent === String(answer)) {
       result.textContent = "";
@@ -121,6 +124,9 @@ digitOperator.addEventListener("click", function (e) {
     clickedOperator !== "=" &&
     clickedOperator !== "Delete"
   ) {
+    // Unfocus after every click
+    e.target.blur();
+
     // If there is error message
     if (result.textContent === "ERROR") {
       result.textContent = "";
