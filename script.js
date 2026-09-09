@@ -153,6 +153,16 @@ digitOperator.addEventListener("click", function (e) {
       result.textContent === "" &&
       firstNumber === undefined
     ) {
+      if (clickedOperator === "-") {
+        result.textContent = "-";
+        calculation.textContent = "-";
+      } else {
+        return;
+      }
+    }
+
+    // Don't treat a lone "-" as a finished number
+    if (result.textContent === "-") {
       return;
     }
 
@@ -346,6 +356,16 @@ document.addEventListener("keydown", function (e) {
       result.textContent === "" &&
       firstNumber === undefined
     ) {
+      if (keyClickedOperator === "-") {
+        result.textContent = "-";
+        calculation.textContent = "-";
+      } else {
+        return;
+      }
+    }
+
+    // Don't treat a lone "-" as a finished number
+    if (result.textContent === "-") {
       return;
     }
 
