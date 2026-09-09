@@ -39,7 +39,7 @@ function operate(operator, num1, num2) {
 function addOperator(operator) {
   const lastChar = calculation.textContent.slice(-1);
 
-  if (operationString.includes(lastChar)) {
+  if (lastChar && operationString.includes(lastChar)) {
     calculation.textContent = calculation.textContent.slice(0, -1) + operator;
   } else {
     calculation.textContent += operator;
@@ -56,6 +56,7 @@ function resetState() {
   secondNumber = undefined;
   operator = undefined;
   answer = undefined;
+  catchNumber = "";
 }
 
 let firstNumber;
@@ -251,7 +252,12 @@ digitOperator.addEventListener("click", function (e) {
 
     if (firstNumber !== undefined && calculation.textContent !== "") {
       deleteCharacter();
-      firstNumber = Number(calculation.textContent);
+      if (calculation.textContent === "") {
+        resetState();
+        isPeriodAvailable = false;
+      } else {
+        firstNumber = Number(calculation.textContent);
+      }
     }
   }
 });
@@ -437,8 +443,12 @@ document.addEventListener("keydown", function (e) {
 
     if (firstNumber !== undefined && calculation.textContent !== "") {
       deleteCharacter();
-      firstNumber = Number(calculation.textContent);
-      console.log(firstNumber);
+      if (calculation.textContent === "") {
+        resetState();
+        isPeriodAvailable = false;
+      } else {
+        firstNumber = Number(calculation.textContent);
+      }
     }
   }
 });
