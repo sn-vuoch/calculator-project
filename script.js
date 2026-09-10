@@ -99,8 +99,19 @@ digitNumber.addEventListener("click", function (e) {
     }
 
     if (e.target.textContent !== ".") {
-      result.textContent += e.target.textContent;
-      calculation.textContent += e.target.textContent;
+      const digit = e.target.textContent;
+      const current = result.textContent;
+
+      if (current === "0" || current === "-0") {
+        if (digit === 0) {
+          return;
+        }
+        result.textContent = current.slice(0, -1) + digit;
+        calculation.textContent = calculation.textContent.slice(0, -1) + digit;
+      } else {
+        result.textContent += digit;
+        calculation.textContent += digit;
+      }
     } else if (e.target.textContent === "." && !isPeriodAvailable) {
       if (result.textContent === "") {
         result.textContent = "0.";
@@ -300,8 +311,19 @@ document.addEventListener("keydown", function (e) {
     }
 
     if (keyClickedOperator !== ".") {
-      result.textContent += keyClickedOperator;
-      calculation.textContent += keyClickedOperator;
+      const digit = keyClickedOperator;
+      const current = result.textContent;
+
+      if (current === "0" || current === "-0") {
+        if (digit === 0) {
+          return;
+        }
+        result.textContent = current.slice(0, -1) + digit;
+        calculation.textContent = calculation.textContent.slice(0, -1) + digit;
+      } else {
+        result.textContent += digit;
+        calculation.textContent += digit;
+      }
     } else if (keyClickedOperator === "." && !isPeriodAvailable) {
       if (result.textContent === "") {
         result.textContent = "0.";
