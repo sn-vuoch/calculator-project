@@ -24,14 +24,25 @@ body {
   flex-direction: column;
   align-items: flex-end;
   justify-content: space-evenly;
+  overflow: hidden;
+}
+
+.display-box .result,
+.calculation {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
 }
 
 .display-box .result {
-  font-size: 50px;
+  font-size: clamp(20px, 8vw, 50px);
 }
 
 .calculation {
-  font-size: 25px;
+  font-size: clamp(14px, 4vw, 25px);
 }
 
 .digit-button {
