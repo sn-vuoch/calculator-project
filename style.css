@@ -9,6 +9,14 @@ body {
   color: #dcd7c9;
 }
 
+.developer {
+  font-family: monospace;
+  text-align: center;
+  font-size: 16px;
+  color: #000;
+  margin-top: 20px;
+}
+
 .container {
   width: 80%;
   height: 600px;
