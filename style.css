@@ -10,7 +10,7 @@ body {
 }
 
 .container {
-  width: 30%;
+  width: 80%;
   height: 600px;
   margin: auto;
   margin-top: 50px;
@@ -145,4 +145,22 @@ body {
 
 .right-container button:first-child {
   font-size: 15px;
+}
+
+@media (min-width: 600px) {
+  .container {
+    width: 60%;
+  }
+}
+
+@media (min-width: 800px) {
+  .container {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1000px) {
+  .container {
+    width: 30%;
+  }
 }
